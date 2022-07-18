@@ -9,20 +9,20 @@
 
 void bubble_sort(int *array, size_t size)
 {
-	size_t j;
+	size_t i, j;
 	int temp;
-	int flag = 1;
+	int flag;
 
 	if (size < 2)
 		return;
 
 	/* Running through each sort pass */
-	while (flag)
+	for (i = 0; i < size - 1; i++)
 	{
 		flag = 0;
 
 		/* Looping the individul elements */
-		for (j = 0; j < size - 1; j++)
+		for (j = 0; j < size - 1 - i; j++)
 		{
 			/* Checking if one element is greater than the next */
 			if (array[j] > array[j + 1])
@@ -36,5 +36,8 @@ void bubble_sort(int *array, size_t size)
 				flag = 1;
 			}
 		}
+		/* if flag is still equal to 0, the array is already sorted, hence break */
+		if (flag == 0)
+			break;
 	}
 }

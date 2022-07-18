@@ -1,6 +1,23 @@
 #include "sort.h"
 
 /**
+ * swap - swaps the elemnts in a array
+ * @array: pointer to the aray
+ * @first: first element
+ * @second: second element
+ * Return: Void
+ */
+
+void swap(int *array, size_t first, size_t second)
+{
+	int temp;
+
+	temp = array[first];
+	array[first] = array[second];
+	array[second] = temp;
+}
+
+/**
  * partition - partitions an array using Lumoto partition scheme
  * @array: pointer to the array
  * @low: lower bound
@@ -72,23 +89,6 @@ void quick_sort_recursion(int *array, size_t low, size_t high, size_t size)
 			/* sort new upper array */
 			quick_sort_recursion(array, sorted_size + 1, high, size);
 	}
-}
-
-/**
- * swap - swaps the elemnts in a array
- * @array: pointer to the aray
- * @first: first element
- * @second: second element
- * Return: Void
- */
-
-void swap(int *array, size_t first, size_t second)
-{
-	int temp;
-
-	temp = array[first];
-	array[first] = array[second];
-	array[second] = temp;
 }
 
 /**

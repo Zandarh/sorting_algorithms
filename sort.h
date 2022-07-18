@@ -28,5 +28,8 @@ void insertion_sort_list(listint_t **list);
 listint_t *swap_doubly_linked_list(listint_t **head, listint_t *node);
 listint_t *create_listint(const int *array, size_t size);
 void selection_sort(int *array, size_t size);
-
+void quick_sort(int *array, size_t size);
+size_t partition(int *array, size_t low, size_t high, size_t size);
+void quick_sort_recursion(int *array, size_t low, size_t high, size_t size);
+void swap(int *array, size_t first, size_t second);
 #endif

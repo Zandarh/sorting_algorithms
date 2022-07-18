@@ -1,90 +1,71 @@
 #include "sort.h"
 
 /**
- * swap_doubly_linked_list - swaps node of a doubly linked list with previous
- * @head: head pointer to the list
- * @node: node to be swapped
- * Return: pointer to the start address of the list
+ * nodes_swap - swapped the nodes in a list
+ *
+ * @list: first node in doubly linked list
+ * @first: address of first node
+ * @second: address of second node
  */
-listint_t *swap_doubly_linked_list(listint_t **head, listint_t *node)
+void nodes_swap(listint_t **list, listint_t *first, listint_t *second)
 {
-	listint_t *next_node, *prev_node;
+	if (!first->prev)	/* at the first node */
+		*list = second;
+	else
+		first->prev->next = second;
 
-	/* When swapping the first two nodes */
-	if (node->prev == *head)
-		*head = node;
+	second->prev = first->prev;
 
-	/* two pointers to point before and after the current node */
-	next_node = node->next;
-	prev_node = node->prev;
+	if (second->next)	/* at the last node */
+		second->next->prev = first;
 
-	/* when *prev_node points to any node except the first node */
-	if (prev_node->prev != NULL)
-		prev_node->prev->next = node;
 
-	/* when the swapping the last node. *next_node == NULL */
-	if (next_node != NULL)
-		next_node->prev = node->prev;
-
-	/* Swapping the links between four nodes */
-	node->prev = prev_node->prev;
-	node->next = prev_node;
-	prev_node->next = next_node;
-	prev_node->prev = node;
-	print_list(*head);
-	return (*head);
-
+	first->prev = second;
+	first->next = second->next;
+	second->next = first;
 }
 
 /**
- * cocktail_sort_list - sorts a list in ascending order 
+ * cocktail_sort_list - sorts a list in ascending order
  * @list: double pointer to the list
- * Return: void 
+ * Return: void
  */
 void cocktail_sort_list(listint_t **list)
 {
-	listint_t *start, *end, *tail;
+	listint_t *end;
 	int check = 1;
 
 	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
 
-	start = tail = *list;
-
-	while (tail != NULL)
-		tail = tail->next;
-
+	end = *list;
 	while (check)
 	{
 		check = 0;
-		end = start;
-
-		while (end != tail)
-        {
-            if (end->n > end->next->n)
-		    {
-			    swap_doubly_linked_list(list, end);
-                check = 1;
-		    }
-            end = end->next;
-        }
+		while (end->next)
+		{
+			if (end->n > end->next->n)
+			{
+				nodes_swap(list, end, end->next);
+				print_list(*list);
+				check = 1;
+				continue;
+			}
+			end = end->next;
+		}
 		if (check == 0)
 			break;
-        
-        check = 0;
-
-		tail = tail->prev;
-		end = tail;
-
-		while (end != start)
-        {
-            if (end->prev->n > end->n)
-		    {
-			    swap_doubly_linked_list(list, end);
-			    check = 1;
-		    }
-            end = end->prev;
-        }
-        start = start->next;
+		check = 0;
+		while (end->prev)
+		{
+			if (end->n < end->prev->n)
+			{
+				nodes_swap(list, end->prev, end);
+				print_list(*list);
+				check = 1;
+				continue;
+			}
+			end = end->prev;
+		}
 	}
 }

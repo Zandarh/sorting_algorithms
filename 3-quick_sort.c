@@ -1,48 +1,4 @@
 #include "sort.h"
-/**
- * quick_sort - sorts array of int in ascending order with Qs
- * @array: Pointer to the array
- * @size: Size of the array
- * Return: void
- */
-
-void quick_sort(int *array, size_t size)
-{
-	if (size < 2)
-		return;
-
-	quick_sort_recursion(array, 0, size - 1, size);
-}
-
-/**
- * quick_sort_recursion - recusrsivly sorts the partition array
- * @array: ointer to the array
- * @low: lower bound
- * @high: higher bound
- * @size: size of the array
- * Return: void
- */
-
-void quick_sort_recursion(int *array, size_t low, size_t high, size_t size)
-{
-	size_t sorted_size;
-
-	/* recursive breakpoint */
-	if (low < high)
-	{
-		sorted_size = partition(array, low, high, size);
-
-		/* checks if the lower partion is more than 2 */
-		if (sorted_size - low > 1)
-			/* sort new lower array */
-			quick_sort_recursion(array, low, sorted_size - 1, size);
-
-		/* cecks if the upper partion is more than two */
-		if (high - sorted_size > 1)
-			/* sort new upper array */
-			quick_sort_recursion(array, sorted_size + 1, high, size);
-	}
-}
 
 /**
  * partition - partitions an array using Lumoto partition scheme
@@ -89,6 +45,36 @@ size_t partition(int *array, size_t low, size_t high, size_t size)
 }
 
 /**
+ * quick_sort_recursion - recusrsivly sorts the partition array
+ * @array: ointer to the array
+ * @low: lower bound
+ * @high: higher bound
+ * @size: size of the array
+ * Return: void
+ */
+
+void quick_sort_recursion(int *array, size_t low, size_t high, size_t size)
+{
+	size_t sorted_size;
+
+	/* recursive breakpoint */
+	if (low < high)
+	{
+		sorted_size = partition(array, low, high, size);
+
+		/* checks if the lower partion is more than 2 */
+		if (sorted_size - low > 1)
+			/* sort new lower array */
+			quick_sort_recursion(array, low, sorted_size - 1, size);
+
+		/* cecks if the upper partion is more than two */
+		if (high - sorted_size > 1)
+			/* sort new upper array */
+			quick_sort_recursion(array, sorted_size + 1, high, size);
+	}
+}
+
+/**
  * swap - swaps the elemnts in a array
  * @array: pointer to the aray
  * @first: first element
@@ -103,4 +89,19 @@ void swap(int *array, size_t first, size_t second)
 	temp = array[first];
 	array[first] = array[second];
 	array[second] = temp;
+}
+
+/**
+ * quick_sort - sorts array of int in ascending order with Qs
+ * @array: Pointer to the array
+ * @size: Size of the array
+ * Return: void
+ */
+
+void quick_sort(int *array, size_t size)
+{
+	if (size < 2)
+		return;
+
+	quick_sort_recursion(array, 0, size - 1, size);
 }

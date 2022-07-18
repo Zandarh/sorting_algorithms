@@ -1,40 +1,5 @@
 #include "sort.h"
 
-/**
- * insertion_sort_list - sorts a doubly linked list in ascending order
- * @list: double pointer to the list
- * Return: void.
-**/
-
-void insertion_sort_list(listint_t **list)
-{
-	listint_t *current, *temp;
-
-	/* checking if the list is empty or has only one node */
-	if (list == NULL || *list == NULL || (*list)->next == NULL)
-		return;
-
-	temp = *list;
-
-	/* Looping till the end node is reached */
-	while (temp != NULL)
-	{
-		current = temp;
-
-		/* checking that the current node has a previous node */
-		/* And that the data in previous node is > the that of curent node */
-		/* This *cuurent will always point at the same node, hence... */
-		/* ... an indirect way of doing a current--, if that makes sense */
-		while (current->prev != NULL && current->prev->n > current->n)
-		{
-			swap_doubly_linked_list(list, current);
-		}
-
-		/* Moving the temp node upward until it reaches the last node */
-		temp = temp->next;
-	}
-
-}
 
 /**
  * swap_doubly_linked_list - swaps node of a doubly linked list with previous
@@ -69,5 +34,41 @@ listint_t *swap_doubly_linked_list(listint_t **head, listint_t *node)
 	prev_node->prev = node;
 	print_list(*head);
 	return (*head);
+
+}
+
+/**
+ * insertion_sort_list - sorts a doubly linked list in ascending order
+ * @list: double pointer to the list
+ * Return: void.
+**/
+
+void insertion_sort_list(listint_t **list)
+{
+	listint_t *current, *temp;
+
+	/* checking if the list is empty or has only one node */
+	if (list == NULL || *list == NULL || (*list)->next == NULL)
+		return;
+
+	temp = *list;
+
+	/* Looping till the end node is reached */
+	while (temp != NULL)
+	{
+		current = temp;
+
+		/* checking that the current node has a previous node */
+		/* And that the data in previous node is > the that of curent node */
+		/* This *cuurent will always point at the same node, hence... */
+		/* ... an indirect way of doing a current--, if that makes sense */
+		while (current->prev != NULL && current->prev->n > current->n)
+		{
+			swap_doubly_linked_list(list, current);
+		}
+
+		/* Moving the temp node upward until it reaches the last node */
+		temp = temp->next;
+	}
 
 }

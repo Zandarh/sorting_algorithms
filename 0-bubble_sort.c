@@ -11,13 +11,13 @@ void bubble_sort(int *array, size_t size)
 {
 	size_t i, j;
 	int temp;
-	int flag;
+	int flag = 1;
 
 	if (size < 2)
 		return;
 
 	/* Running through each sort pass */
-	for (i = 0; i < size - 1; i++)
+	while (flag)
 	{
 		flag = 0;
 
@@ -36,8 +36,5 @@ void bubble_sort(int *array, size_t size)
 				flag = 1;
 			}
 		}
-		/* if flag is still equal to 0, the array is already sorted, hence break */
-		if (flag == 0)
-			break;
 	}
 }

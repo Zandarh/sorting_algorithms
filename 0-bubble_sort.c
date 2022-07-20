@@ -28,9 +28,9 @@ void swap(int *array, size_t first, size_t second)
 void bubble_sort(int *array, size_t size)
 {
 	size_t j;
-	int flag = 1;
+	bool flag = 1;
 
-	if (size < 2)
+	if (array == NULL || size < 2)
 		return;
 
 	/* Running through each sort pass */

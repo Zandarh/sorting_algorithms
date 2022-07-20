@@ -1,6 +1,24 @@
 #include "sort.h"
 
 /**
+ * swap - swaps the elemnts in a array
+ * @array: pointer to the aray
+ * @first: first element
+ * @second: second element
+ * Return: Void
+ */
+
+void swap(int *array, size_t first, size_t second)
+{
+	int temp;
+
+	temp = array[first];
+	array[first] = array[second];
+	array[second] = temp;
+}
+
+
+/**
  * selection_sort - sorts an array of integers in ascending order
  * @array: pointer to the array
  * @size: size of the array
@@ -11,7 +29,6 @@ void selection_sort(int *array, size_t size)
 {
 	size_t i, j;
 	size_t min;
-	int temp;
 
 	if (size < 2)
 		return;
@@ -34,9 +51,7 @@ void selection_sort(int *array, size_t size)
 		if (min != i)
 		{
 			/* sawp the value first in the unsorted list with the lowest number */
-			temp = array[i];
-			array[i] = array[min];
-			array[min] = temp;
+			swap(array, i, min);
 			print_array(array, size);
 		}
 	}

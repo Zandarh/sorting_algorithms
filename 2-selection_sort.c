@@ -1,44 +1,57 @@
 #include "sort.h"
 
 /**
- * swap_ints - Swap two integers in an array.
- * @a: The first integer to swap.
- * @b: The second integer to swap.
+ * swap - swaps the elemnts in a array
+ * @array: pointer to the aray
+ * @first: first element
+ * @second: second element
+ * Return: Void
  */
-void swap_ints(int *a, int *b)
-{
-	int tmp;
 
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
+void swap(int *array, size_t first, size_t second)
+{
+	int temp;
+
+	temp = array[first];
+	array[first] = array[second];
+	array[second] = temp;
 }
 
+
 /**
- * selection_sort - Sort an array of integers in ascending order
- *                  using the selection sort algorithm.
- * @array: An array of integers.
- * @size: The size of the array.
- *
- * Description: Prints the array after each swap.
+ * selection_sort - sorts an array of integers in ascending order
+ * @array: pointer to the array
+ * @size: size of the array
+ * Return: void
  */
+
 void selection_sort(int *array, size_t size)
 {
-	int *min;
 	size_t i, j;
+	size_t min;
 
-	if (array == NULL || size < 2)
+	if (size < 2)
 		return;
 
 	for (i = 0; i < size - 1; i++)
 	{
-		min = array + i;
-		for (j = i + 1; j < size; j++)
-			min = (array[j] < *min) ? (array + j) : min;
+		min = i;
 
-		if ((array + i) != min)
+		/* looping to get the lowest. swap it with first in the unsorted array */
+		for (j = i + 1; j < size; j++)
 		{
-			swap_ints(array + i, min);
+			/* checking to find the lowest number, and updating min */
+			if (array[j] < array[min])
+			{
+				min = j;
+			}
+		}
+
+		/* Checking if the lowest number == i(The first no in the unsorted array */
+		if (min != i)
+		{
+			/* sawp the value first in the unsorted list with the lowest number */
+			swap(array, i, min);
 			print_array(array, size);
 		}
 	}

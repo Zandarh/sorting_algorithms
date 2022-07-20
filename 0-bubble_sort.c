@@ -34,7 +34,7 @@ void bubble_sort(int *array, size_t size)
 		return;
 
 	/* Running through each sort pass */
-	while (flag)
+	while (flag == true)
 	{
 		flag = false;
 

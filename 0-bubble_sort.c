@@ -1,46 +1,55 @@
 #include "sort.h"
 
 /**
- * swap_ints - Swap two integers in an array.
- * @a: The first integer to swap.
- * @b: The second integer to swap.
+ * swap - swaps the elemnts in a array
+ * @array: pointer to the aray
+ * @first: first element
+ * @second: second element
+ * Return: Void
  */
-void swap_ints(int *a, int *b)
-{
-	int tmp;
 
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
+void swap(int *array, size_t first, size_t second)
+{
+	int temp;
+
+	temp = array[first];
+	array[first] = array[second];
+	array[second] = temp;
 }
 
+
 /**
- * bubble_sort - Sort an array of integers in ascending order.
- * @array: An array of integers to sort.
- * @size: The size of the array.
- *
- * Description: Prints the array after each swap.
+ * bubble_sort - sorts an array of integers in ascending order
+ * @array: pointer to the array
+ * @size: size of the array
+ * Return: void
  */
+
 void bubble_sort(int *array, size_t size)
 {
-	size_t i, len = size;
-	bool bubbly = false;
+	size_t j;
+	bool flag = true;
 
 	if (array == NULL || size < 2)
 		return;
 
-	while (bubbly == false)
+	/* Running through each sort pass */
+	while (flag)
 	{
-		bubbly = true;
-		for (i = 0; i < len - 1; i++)
+		flag = false;
+
+		/* Looping the individul elements */
+		for (j = 0; j < size - 1; j++)
 		{
-			if (array[i] > array[i + 1])
+			/* Checking if one element is greater than the next */
+			if (array[j] > array[j + 1])
 			{
-				swap_ints(array + i, array + i + 1);
+				/* Changing the value of flag indicating a swap */
+				flag = true;
+				/* Swapping them if it is greater */
+				swap(array, j, j + 1);
 				print_array(array, size);
-				bubbly = false;
 			}
 		}
-		len--;
 	}
 }

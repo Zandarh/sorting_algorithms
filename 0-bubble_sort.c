@@ -27,28 +27,22 @@ void swap(int *array, size_t first, size_t second)
 
 void bubble_sort(int *array, size_t size)
 {
-	size_t j, len = size;
-	bool flag = true;
+	size_t i, len = size;
+	bool bubbly = false;
 
 	if (array == NULL || size < 2)
 		return;
 
-	/* Running through each sort pass */
-	while (flag)
+	while (bubbly == false)
 	{
-		flag = false;
-
-		/* Looping the individul elements */
-		for (j = 0; j < len - 1; j++)
+		bubbly = true;
+		for (i = 0; i < len - 1; i++)
 		{
-			/* Checking if one element is greater than the next */
-			if (array[j] > array[j + 1])
+			if (array[i] > array[i + 1])
 			{
-				/* Changing the value of flag indicating a swap */
-				flag = true;
-				/* Swapping them if it is greater */
-				swap(array, j, j + 1);
+				swap_ints(array + i, array + i + 1);
 				print_array(array, size);
+				bubbly = false;
 			}
 		}
 		len--;

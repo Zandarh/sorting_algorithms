@@ -75,7 +75,7 @@ void quick_sort_recursion(int *array, size_t low, size_t high, size_t size)
 	size_t sorted_size;
 
 	/* recursive breakpoint */
-	if (low < high)
+	if (high - low > 0)
 	{
 		sorted_size = partition(array, low, high, size);
 
